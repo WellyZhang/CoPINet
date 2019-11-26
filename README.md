@@ -41,6 +41,8 @@ Performance on PGM:
 | :---   | :---:  | :---:   | :---:  | :---:       | :---:          | :---:      |
 | Acc    | 33.00% | 35.80%  | 42.00% | 48.00%      | 49.10%         | **56.37%** | 
 
+For CoPINet, we note that after cleaning the code, we can potentially get numbers slightly better than reported in the paper. Here, we only show numbers we got when we submitted the paper.
+
 # Dependencies
 
 **Important**
@@ -54,7 +56,7 @@ See ```requirements.txt``` for a full list of packages required.
 
 To train CoPINet, run
 ```
-python src/main.py train --dataset <path/to/dataset>
+python src/main.py train --dataset <path to dataset>
 ```
 
 The default hyper-parameters should work. However, you can check ```main.py``` for a full list of arguments you can adjust. 
