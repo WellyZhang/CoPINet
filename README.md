@@ -69,8 +69,8 @@ If you find the paper and/or the code helpful, please cite us.
 
 ```
 @inproceedings{zhang2019learning,
-    author={Zhang, Chi and Jia, Baoxiong and Gao, Feng and Zhu, Yixin and Lu, Hongjing and Zhu, Song-Chun},
     title={Learning Perceptual Inference by Contrasting},
+    author={Zhang, Chi and Jia, Baoxiong and Gao, Feng and Zhu, Yixin and Lu, Hongjing and Zhu, Song-Chun},
     booktitle={Advances in Neural Information Processing Systems (NeurIPS)},
     year={2019}
 }
