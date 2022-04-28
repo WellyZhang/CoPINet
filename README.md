@@ -46,7 +46,7 @@ For CoPINet, we note that after cleaning the code, we can potentially get number
 # Dependencies
 
 **Important**
-* Python 2.7
+* Python3 supported
 * PyTorch
 * CUDA and cuDNN expected
 

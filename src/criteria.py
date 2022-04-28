@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 import torch
 import torch.nn.functional as F
 
@@ -24,4 +23,3 @@ def contrast_loss(output, target):
     zeros = torch.zeros_like(gt_value)
     zeros.scatter_(1, target.view(-1, 1), 1.0)
     return F.binary_cross_entropy_with_logits(G, zeros)
-    

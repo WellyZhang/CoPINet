@@ -1,28 +1,37 @@
 # -*- coding: utf-8 -*-
 
-
 import torch
 import torch.nn as nn
-import torchvision.models as models
 
 
 def conv1x1(in_channel, out_channel, stride=1):
-    return nn.Conv2d(in_channel, out_channel, kernel_size=1, stride=stride, bias=False)
+    return nn.Conv2d(in_channel,
+                     out_channel,
+                     kernel_size=1,
+                     stride=stride,
+                     bias=False)
 
 
 def conv3x3(in_channel, out_channel, stride=1):
-    return nn.Conv2d(in_channel, out_channel, kernel_size=3, stride=stride, padding=1, bias=False)
+    return nn.Conv2d(in_channel,
+                     out_channel,
+                     kernel_size=3,
+                     stride=stride,
+                     padding=1,
+                     bias=False)
 
 
 class Identity(nn.Module):
+
     def __init__(self):
         super(Identity, self).__init__()
-    
+
     def forward(self, x):
         return x
 
 
 class MLP(nn.Module):
+
     def __init__(self, in_dim=256, out_dim=8, dropout=False):
         super(MLP, self).__init__()
         self.fc1 = nn.Linear(in_dim, in_dim)
@@ -41,6 +50,7 @@ class MLP(nn.Module):
 
 
 class ResBlock(nn.Module):
+
     def __init__(self, in_channel, out_channel, stride=1, downsample=None):
         super(ResBlock, self).__init__()
         self.conv1 = conv3x3(in_channel, out_channel, stride)
@@ -52,7 +62,7 @@ class ResBlock(nn.Module):
             self.downsample = Identity()
         else:
             self.downsample = downsample
-    
+
     def forward(self, x):
         out = self.relu(self.bn1(self.conv1(x)))
         out = self.relu(self.downsample(x) + self.bn2(self.conv2(out)))
@@ -61,6 +71,7 @@ class ResBlock(nn.Module):
 
 
 class GumbelSoftmax(nn.Module):
+
     def __init__(self, interval=100, temperature=1.0):
         super(GumbelSoftmax, self).__init__()
         self.temperature = temperature
@@ -71,7 +82,9 @@ class GumbelSoftmax(nn.Module):
         self.temperature_min = 0.5
 
     def anneal(self):
-        self.temperature = max(self.temperature * torch.exp(-self.anneal_rate * self.counter), self.temperature_min)
+        self.temperature = max(
+            self.temperature * torch.exp(-self.anneal_rate * self.counter),
+            self.temperature_min)
 
     def sample_gumbel(self, logits, eps=1e-20):
         U = torch.rand_like(logits)
