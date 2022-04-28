@@ -21,12 +21,12 @@ class dataset(Dataset):
             self.file_names = [
                 f for f in glob.glob(
                     os.path.join(self.dataset_path, "*", "*.npz"))
-                if dataset_type
+                if dataset_type in f
             ]
         else:
             self.file_names = [
                 f for f in glob.glob(os.path.join(self.dataset_path, "*.npz"))
-                if dataset_type
+                if dataset_type in f
             ]
         self.img_size = img_size
 
